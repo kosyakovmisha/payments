@@ -1,6 +1,7 @@
 package com.dev.payments.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -25,7 +26,7 @@ public class Payment {
     @NotNull
     private BigDecimal cost;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name="category_id", nullable = false)
     private Category category;
 

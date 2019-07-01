@@ -2,9 +2,10 @@ package com.dev.payments.model;
 
 
 import lombok.Data;
-import lombok.Generated;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -16,11 +17,16 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "category")
-    private Set<Payment> payments;
+    @OneToMany(
+            mappedBy = "category",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Payment> payments = new HashSet<>();
 
     protected Category() {
 
