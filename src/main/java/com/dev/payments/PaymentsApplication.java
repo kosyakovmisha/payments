@@ -1,11 +1,10 @@
 package com.dev.payments;
 
-import com.dev.payments.model.Category;
+import com.dev.payments.model.category.Category;
 import com.dev.payments.model.Client;
 import com.dev.payments.model.Payment;
 import com.dev.payments.repository.CategoryRepository;
 import com.dev.payments.repository.ClientRepository;
-import com.dev.payments.repository.PaymentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

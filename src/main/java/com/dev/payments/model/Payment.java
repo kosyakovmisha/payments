@@ -1,7 +1,7 @@
 package com.dev.payments.model;
 
+import com.dev.payments.model.category.Category;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

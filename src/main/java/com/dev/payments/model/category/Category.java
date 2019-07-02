@@ -1,6 +1,8 @@
-package com.dev.payments.model;
+package com.dev.payments.model.category;
 
 
+import com.dev.payments.model.Payment;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -26,6 +28,7 @@ public class Category {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    //@JsonIgnore
     private Set<Payment> payments = new HashSet<>();
 
     protected Category() {
