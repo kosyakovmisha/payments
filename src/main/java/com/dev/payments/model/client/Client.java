@@ -1,10 +1,12 @@
-package com.dev.payments.model;
+package com.dev.payments.model.client;
 
+import com.dev.payments.model.payment.Payment;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -25,13 +27,15 @@ public class Client {
     @Column
     @NotNull
     private String lastName;
+
+    @Column
     private BigDecimal balance;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "client_payments",
         joinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "payment_id", referencedColumnName = "id"))
-    private List<Payment> payments;
+    private List<Payment> payments = new ArrayList<>();
 
     protected Client() {
 

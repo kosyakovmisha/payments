@@ -1,24 +1,19 @@
 package com.dev.payments.model.category;
 
-import com.dev.payments.model.Payment;
-import lombok.Data;
+import com.dev.payments.model.payment.Payment;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
+@Getter
+@Setter
 public class CategoryDTO {
 
     private long id;
     private String name;
-    private Set<Payment> payments = new HashSet<>();
-
-    protected CategoryDTO() {
-    }
-
-    public CategoryDTO(String name) {
-        this.name = name;
-    }
+    private List<Payment> payments = new ArrayList<>();
 
     @Override
     public String toString() {

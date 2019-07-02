@@ -1,14 +1,13 @@
 package com.dev.payments.model.category;
 
 
-import com.dev.payments.model.Payment;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.dev.payments.model.payment.Payment;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 
@@ -28,7 +27,7 @@ public class Category {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private Set<Payment> payments = new HashSet<>();
+    private List<Payment> payments = new ArrayList<>();
 
     protected Category() {
 
