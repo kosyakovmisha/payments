@@ -20,7 +20,6 @@ public class PaymentsApplication implements CommandLineRunner {
 
     @Autowired
     private ClientRepository clientRepository;
-    private CategoryRepository categoryRepository;
 
     public static void main(String[] args) {
 

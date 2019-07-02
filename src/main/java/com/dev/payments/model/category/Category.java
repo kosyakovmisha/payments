@@ -28,7 +28,6 @@ public class Category {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    //@JsonIgnore
     private Set<Payment> payments = new HashSet<>();
 
     protected Category() {

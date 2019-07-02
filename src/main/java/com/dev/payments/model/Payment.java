@@ -6,8 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Data
 
@@ -30,8 +29,9 @@ public class Payment {
     @JoinColumn(name="category_id", nullable = false)
     private Category category;
 
-    @ManyToMany(mappedBy = "payments")
-    private Set<Client> clients = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY,
+            mappedBy = "payments")
+    private List<Client> clients;
 
     protected Payment() {
 

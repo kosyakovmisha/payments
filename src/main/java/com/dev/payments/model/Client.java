@@ -1,17 +1,15 @@
 package com.dev.payments.model;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Data
-@EqualsAndHashCode(exclude = "payments")
 
 @Entity
 public class Client {
@@ -33,7 +31,7 @@ public class Client {
     @JoinTable(name = "client_payments",
         joinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "payment_id", referencedColumnName = "id"))
-    private Set<Payment> payments;
+    private List<Payment> payments;
 
     protected Client() {
 
@@ -43,7 +41,7 @@ public class Client {
         this.firstName = firstName;
         this.lastName = lastName;
         this.balance = balance;
-        this.payments = Stream.of(payments).collect(Collectors.toSet());
+        this.payments = Stream.of(payments).collect(Collectors.toList());
         this.payments.forEach(payment -> payment.getClients().add(this));
     }
 
