@@ -2,6 +2,7 @@ package com.dev.payments.payment;
 
 import com.dev.payments.category.Category;
 import com.dev.payments.client.Client;
+import com.dev.payments.client.ClientDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +18,6 @@ public class PaymentDTO {
     private String name;
     private BigDecimal cost;
     private Category category;
-    private List<Client> clients = new ArrayList<>();
 
     @Override
     public String toString() {

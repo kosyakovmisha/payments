@@ -2,6 +2,7 @@ package com.dev.payments.category;
 
 
 import com.dev.payments.payment.Payment;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 

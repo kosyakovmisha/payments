@@ -21,7 +21,16 @@ public class CategoryService {
     }
 
     public Category getByName(String name) {
-        return categoryRepository.findByName(name).orElse(new Category(name));
+        return categoryRepository.findByName(name).orElse(null);
+    }
+
+    public Category createCategory(String name) {
+        Category category = getByName(name);
+        if (category == null) {
+            category = new Category(name);
+            categoryRepository.save(category);
+        }
+        return category;
     }
 
 

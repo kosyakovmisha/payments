@@ -34,7 +34,6 @@ public class Client {
     @Column
     private BigDecimal balance;
 
-    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "client_payments",
         joinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"),

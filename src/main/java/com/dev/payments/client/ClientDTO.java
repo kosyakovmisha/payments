@@ -1,6 +1,7 @@
 package com.dev.payments.client;
 
 import com.dev.payments.payment.Payment;
+import com.dev.payments.payment.PaymentDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +17,7 @@ public class ClientDTO {
     private String firstName;
     private String lastName;
     private BigDecimal balance;
-    private List<Payment> payments = new ArrayList<>();
+    private List<PaymentDTO> payments = new ArrayList<>();
 
     @Override
     public String toString() {

@@ -37,8 +37,7 @@ public class PaymentsApplication implements CommandLineRunner {
     @Transactional
     @Override
     public void run(String... args) {
-        Payment payment = new Payment("taxa", "100", categoryService.getByName("test2"));
-        paymentRepository.save(payment);
+
     }
 
     public void startedTest() {
