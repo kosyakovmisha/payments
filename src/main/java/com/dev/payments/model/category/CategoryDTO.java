@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 public class CategoryDTO {
 
-    private long id;
+    private int id;
     private String name;
     private List<Payment> payments = new ArrayList<>();
 

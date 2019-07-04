@@ -2,6 +2,7 @@ package com.dev.payments.model.category;
 
 
 import com.dev.payments.model.payment.Payment;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,11 +17,12 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @NotNull
     @Column(name = "name", unique = true)
     private String name;
+
 
     @OneToMany(
             mappedBy = "category",

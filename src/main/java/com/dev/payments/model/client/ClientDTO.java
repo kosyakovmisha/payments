@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 public class ClientDTO {
 
-    private long id;
+    private int id;
     private String firstName;
     private String lastName;
     private BigDecimal balance;

@@ -1,6 +1,7 @@
 package com.dev.payments.model.client;
 
 import com.dev.payments.model.payment.Payment;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,7 +19,7 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
 
     @Column
     @NotNull
@@ -31,6 +32,7 @@ public class Client {
     @Column
     private BigDecimal balance;
 
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "client_payments",
         joinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"),

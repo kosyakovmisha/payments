@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 public class PaymentDTO {
 
-    private long id;
+    private int id;
     private String name;
     private BigDecimal cost;
     private Category category;
