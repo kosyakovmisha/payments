@@ -1,8 +1,9 @@
-package com.dev.payments.model.client;
+package com.dev.payments.client;
 
-import com.dev.payments.model.payment.Payment;
+import com.dev.payments.payment.Payment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,13 +13,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Data
+@Getter
+@Setter
 
 @Entity
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column
@@ -33,7 +35,7 @@ public class Client {
     private BigDecimal balance;
 
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "client_payments",
         joinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "payment_id", referencedColumnName = "id"))
@@ -43,10 +45,10 @@ public class Client {
 
     }
 
-    public Client(String firstName, String lastName, BigDecimal balance, Payment... payments) {
+    public Client(String firstName, String lastName, String balance, Payment... payments) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.balance = balance;
+        this.balance = new BigDecimal(balance);
         this.payments = Stream.of(payments).collect(Collectors.toList());
         this.payments.forEach(payment -> payment.getClients().add(this));
     }

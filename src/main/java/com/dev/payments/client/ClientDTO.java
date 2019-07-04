@@ -1,6 +1,6 @@
-package com.dev.payments.model.client;
+package com.dev.payments.client;
 
-import com.dev.payments.model.payment.Payment;
+import com.dev.payments.payment.Payment;
 import lombok.Getter;
 import lombok.Setter;
 

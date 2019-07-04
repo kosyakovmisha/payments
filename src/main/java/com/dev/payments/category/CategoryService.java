@@ -1,6 +1,5 @@
-package com.dev.payments.model.category;
+package com.dev.payments.category;
 
-import com.dev.payments.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +15,14 @@ public class CategoryService {
 
         return categoryRepository.findAll();
     }
+
+    public Category getById(int id) {
+        return categoryRepository.findById(id).orElse(null);
+    }
+
+    public Category getByName(String name) {
+        return categoryRepository.findByName(name).orElse(new Category(name));
+    }
+
 
 }

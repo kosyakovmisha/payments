@@ -1,7 +1,7 @@
-package com.dev.payments.model.payment;
+package com.dev.payments.payment;
 
-import com.dev.payments.model.category.Category;
-import com.dev.payments.model.client.Client;
+import com.dev.payments.category.Category;
+import com.dev.payments.client.Client;
 import lombok.Getter;
 import lombok.Setter;
 

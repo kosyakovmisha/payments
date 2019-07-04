@@ -1,16 +1,17 @@
-package com.dev.payments.model.category;
+package com.dev.payments.category;
 
 
-import com.dev.payments.model.payment.Payment;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import com.dev.payments.payment.Payment;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 
 @Entity
 public class Category {
@@ -37,7 +38,9 @@ public class Category {
 
     public Category(String name) {
         this.name = name;
+
     }
+
 
     @Override
     public String toString() {

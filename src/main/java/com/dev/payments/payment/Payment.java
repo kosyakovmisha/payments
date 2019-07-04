@@ -1,9 +1,10 @@
-package com.dev.payments.model.payment;
+package com.dev.payments.payment;
 
-import com.dev.payments.model.category.Category;
-import com.dev.payments.model.client.Client;
+import com.dev.payments.category.Category;
+import com.dev.payments.client.Client;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,8 +12,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 
+@Getter
+@Setter
 @Entity
 public class Payment {
 
@@ -29,10 +31,11 @@ public class Payment {
     private BigDecimal cost;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="category_id", nullable = false)
     private Category category;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,
             mappedBy = "payments")
     private List<Client> clients = new ArrayList<>();
