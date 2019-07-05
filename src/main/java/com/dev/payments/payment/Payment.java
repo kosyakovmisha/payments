@@ -2,6 +2,7 @@ package com.dev.payments.payment;
 
 import com.dev.payments.category.Category;
 import com.dev.payments.client.Client;
+import com.dev.payments.personalpayments.PersonalPayment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,14 +32,17 @@ public class Payment {
     private BigDecimal cost;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name="category_id", nullable = false)
     private Category category;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY,
-            mappedBy = "payments")
-    private List<Client> clients = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "payment",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<PersonalPayment> personalPayments = new ArrayList<>();
 
     protected Payment() {
 

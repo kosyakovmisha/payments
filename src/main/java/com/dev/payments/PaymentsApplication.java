@@ -6,6 +6,8 @@ import com.dev.payments.client.Client;
 import com.dev.payments.payment.Payment;
 import com.dev.payments.client.ClientRepository;
 import com.dev.payments.payment.PaymentRepository;
+import com.dev.payments.personalpayments.PersonalPayment;
+import com.dev.payments.personalpayments.PersonalPaymentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -28,6 +30,9 @@ public class PaymentsApplication implements CommandLineRunner {
     @Autowired
     private PaymentRepository paymentRepository;
 
+    @Autowired
+    private PersonalPaymentRepository personalPaymentRepository;
+
     public static void main(String[] args) {
 
         SpringApplication.run(PaymentsApplication.class, args);
@@ -37,7 +42,7 @@ public class PaymentsApplication implements CommandLineRunner {
     @Transactional
     @Override
     public void run(String... args) {
-
+        startedTest();
     }
 
     public void startedTest() {
@@ -52,12 +57,26 @@ public class PaymentsApplication implements CommandLineRunner {
         Payment driving = new Payment("driving", "25", social);
         Payment homeTax = new Payment("homeTax", "300", tax);
 
-        Client misha = new Client("Misha", "Kosyakov", "1000", brainFix, eyesFix, homeTax);
-        Client vlad = new Client("Vlad", "Develope", "100000", handsFix, driving, homeTax);
-        Client artem = new Client("Artem", "Sikas", "5333", kompi, driving, eyesFix, homeTax);
+        Client misha = new Client("Misha", "Kosyakov", "1000",
+                new PersonalPayment(brainFix),
+                new PersonalPayment(eyesFix),
+                new PersonalPayment(homeTax)
+        );
+        Client vlad = new Client("Vlad", "Develope", "100000",
+                new PersonalPayment(handsFix),
+                new PersonalPayment(driving),
+                new PersonalPayment(homeTax)
+        );
+        Client artem = new Client("Artem", "Sikas", "5333",
+                new PersonalPayment(kompi),
+                new PersonalPayment(driving),
+                new PersonalPayment(eyesFix),
+                new PersonalPayment(homeTax)
+        );
 
         clientRepository.save(misha);
         clientRepository.save(vlad);
         clientRepository.save(artem);
+
     }
 }

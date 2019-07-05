@@ -1,7 +1,6 @@
 package com.dev.payments.client;
 
-import com.dev.payments.payment.Payment;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.dev.payments.personalpayments.PersonalPayment;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,22 +33,26 @@ public class Client {
     @Column
     private BigDecimal balance;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "client_payments",
-        joinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "payment_id", referencedColumnName = "id"))
-    private List<Payment> payments = new ArrayList<>();
+    @OneToMany(
+            mappedBy = "client",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<PersonalPayment> personalPayments = new ArrayList<>();
 
     protected Client() {
 
     }
 
-    public Client(String firstName, String lastName, String balance, Payment... payments) {
+    public Client(String firstName, String lastName, String balance, PersonalPayment... payments) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.balance = new BigDecimal(balance);
-        this.payments = Stream.of(payments).collect(Collectors.toList());
-        this.payments.forEach(payment -> payment.getClients().add(this));
+        this.personalPayments = Stream.of(payments).collect(Collectors.toList());
+        this.personalPayments.forEach(payment -> {
+            payment.setClient(this);
+            payment.setId(this.id);
+        });
     }
 
     @Override
